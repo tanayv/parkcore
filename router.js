@@ -28,9 +28,14 @@ module.exports = function (app) {
         res.send('Query was Exectued (0.110220202 ms)');
     });
     
-    app.get('/geo', function (req, res) {
-        res.sendFile(path.join(__dirname + '/location.html'));
+    app.post('/addSpot', function (req, res) {
+        var lat = req.body.lat;
+        var lng = req.body.lng;
+        res.send('' + lat + ', ' + lng);
     });
+    
+    
+
     
     
     

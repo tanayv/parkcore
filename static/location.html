@@ -9,6 +9,11 @@
 	width: 500px;
 	height: 500px;
 }
+
+#latitude, #longitude
+{
+	
+}
 </style>
 
 <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=true"></script>
@@ -48,6 +53,8 @@
 				});
 
 			console.log((latlng.lat).toFixed(5) + "," + (latlng.lng).toFixed(5));
+			document.getElementById('latitude').value = latlng.lat;
+			document.getElementById('longitude').value = latlng.lng;
 	}
 
 	function showError(error)
@@ -71,10 +78,12 @@
 	}
 	</script>
 	</head>
-	<body>
+	<body onload = revGeoLocate()>
 		<p id = mapdiv></p>
-		<button onclick="revGeoLocate()">
-			Vacat
-		</button>
+		<form action = /addSpot method = POST>
+		<input name = lng type = text id = longitude>
+		<input name = lat type = text id = latitude>
+		<input type = submit value = Submit>
+		</form>
 	</body>
 </html>
