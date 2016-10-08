@@ -8,7 +8,7 @@ module.exports = function (app) {
       host: "localhost",
       user: "tanayv",
       password: "",
-      database: "c9"
+      database: "c9",
     });
     
     con.connect(function(err){
@@ -19,15 +19,22 @@ module.exports = function (app) {
       console.log('Connection established');
     });
     
-    con.end(function(err) {
-      // The connection is terminated gracefully
-      // Ensures all previously enqueued queries are still
-      // before sending a COM_QUIT packet to the MySQL server.
-    });
     
     app.get('/', function (req, res) {
-          res.render('index', { title: 'Hey', message: 'rows'});
+        
+        con.query("INSERT INTO users (fullName, email) VALUES ('Bharat Kashyap', 'bbw@ghm.com')", function (err,rows) {
+        console.log("Query Executed");
+        });
+        res.send('Query was Exectued (0.110220202 ms)');
     });
+    
+    app.get('/geo', function (req, res) {
+        res.sendFile(path.join(__dirname + '/location.html'));
+    });
+    
+    
+    
+    
 
     
 }
