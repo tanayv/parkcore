@@ -3,14 +3,14 @@ var express = require('express');
 var app = express();
 var port = process.env.PORT || 8080;
 
+app.set('views', './views')
+app.set('view engine', 'pug');
+
+app.use(express.static(__dirname + '/views'));
 
 //RouterBoy
-app.post('/', function (req, res) {
-  res.send('POST request to the homepage');
-});
-
 app.get('/', function (req, res) {
-  res.send('Starboy');
+  res.render('index', { title: 'Hey', message: 'Hello there!'});
 });
 
 //SeequlBoy
