@@ -43,13 +43,14 @@
 				if(status == 'OK')
 					{
 						if(results[0])
-							elem.innerHTML += "" + results[0].formatted_address;
+							elem.innerHTML = "" + results[0].formatted_address.substring(0, results[0].formatted_address.length-15);
 					}
 				});
 
 			console.log((latlng.lat).toFixed(5) + "," + (latlng.lng).toFixed(5));
 			document.getElementById('latitude').value = latlng.lat;
 			document.getElementById('longitude').value = latlng.lng;
+			document.getElementById('submitLocation').disabled = false;
 	}
 
 	function showError(error)
@@ -75,15 +76,17 @@
 	</head>
 	<body onload = revGeoLocate()>
 		<div class='container'>
-			<div class='top'><center>New Parking Spot</center></div>
+			<div class='top'><div id = left>&nbsp; <a href=dashboy.html>&#8592;</a></div> </div>
 			<div class='cardFeed'>
 			<center>
-				<div class='card' style='padding: 44px;box-sizing: border-box;'>
-					<p id='mapdiv'></p>
+				<div class='card' style='box-sizing: border-box;'>
+					<p id='mapdiv'>Location: Fetching Address..</p>
 					<form action='/addSpot' method='POST'>
+						<p class='formLatLong'>
 						Longitude: <input name='lng' type='text' id='longitude' > <br>
 						Latitude: <input name='lat' type='text' id='latitude' > <br> <br>
-						<center><input type='submit' value='Add Parking Spot'></center> <br>
+						</p>
+						<center><input type='submit' value='Add Parking Spot' disabled id='submitLocation'></center> <br>
 					</form>
 				</div>
 				<br>

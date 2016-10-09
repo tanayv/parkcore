@@ -5,7 +5,8 @@ html
   body
     div(class='container')
       div(class='top')
-        center #{rName}
+        div(id='left')
+          a(href='#' onClick='history.go(-1)') &nbsp; &#8592;
       div(class='cardFeed')
         center
           div(class='card iFrame')

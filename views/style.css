@@ -19,6 +19,19 @@ a {
 	color: initial;
 }
 
+input[disabled] {
+	opacity: 0.5;
+}
+
+#mapdiv {
+	text-align: center;
+    font-size: 24px;
+}
+
+p.formLatLong {
+	display: none;
+}
+
 .container {
 	width: 100%;
     font-size: 3rem;
@@ -26,7 +39,7 @@ a {
 }
 
 	.container .top {
-		background-color: #00BFA5;
+		background-color: #532e63;
 		width: 100%;
 		height: 150px;
 		color: #fff;
@@ -35,8 +48,31 @@ a {
     	-webkit-box-sizing: border-box; 
     	box-sizing: border-box; 
     	line-height: 150px;
-    	position: fixed;
+    	position: fixed; 
+    	background-image: url(topHeader.png);
+	    background-size: 45%;
+	    background-position: center;
+	    background-repeat: no-repeat;
+	    z-index: 5;
 	}
+	
+	#left
+	{
+		float : left;
+	}
+	
+	
+	#central
+	{
+		margin : 0 auto;
+		text-align : center;
+	}
+
+	.container .top a {
+		color : #fff;
+		text-decoration : none;
+	}
+
 
 	.container .cardFeed {
 		width: 100%;
@@ -56,31 +92,29 @@ a {
 		text-align: left;
 		border-radius: 5px;
 		padding: 10px;
-		min-height: 180px;
-		top: 50%;
-		margin-bottom: 25px;
+		margin-bottom: 15px;
 		box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
   		transition: all 0.3s cubic-bezier(.25,.8,.25,1);
 	}
 
 	.container .cardFeed .card p {
-		margin-top: 20px;
-		font-size: 2.36rem;
+		margin-top: 15px;
+		font-size: 24px;
 	}
 
 	.container .cardFeed .card .cirq {
-		height: 140px;
+		height: 80px;
 		background-color: #00E676;
 		float: left;
-		width: 140px;
+		width: 80px;
 		border-radius: 100%;
-		margin-right: 40px;
-		margin-left: 20px;
+		margin-right: 20px;
+		margin-left: 10px;
 		text-align: center;
 		color: #fff;
-		font-size: 100px;
-		line-height: 140px;
-		margin-top: 20;
+		font-size: 50px;
+		line-height: 80px;
+		margin-top: 10;
 	}
 
 	.container .cardFeed .card .cirq.solei {
@@ -96,6 +130,7 @@ a {
 		text-align: center;
 		min-height: 100px;
 		line-height: 100px;
+		font-size: 24px;
 	}
 	
 	.container .logo {
@@ -107,20 +142,43 @@ a {
 	    background-position: center;
 	}
 	
+	.my-signin2
+	{
+		font-family : 1.5em;
+	}
+
+
+
 	.container .cardFeed .card input[type='text'] {
 		width: 90%;
-		font-size: 3rem;
+		font-size: 24px;
 		background-color: initial;
 		border: none;
 	}
 	
 	.container .cardFeed .card input[type='submit'] {
 		width: 90%;
-		font-size: 3rem;
-		background-color: #8E24AA;
+		font-size: 24px;
+		background-color: #00C853;
 		color: #fff;
 		padding: 15px;
 	}
 	
-
-
+	.container .check 
+	{
+		font-size : 1.8em;
+		color : #009925;
+	}
+	
+	#successmsg
+	{
+		font-size : 24px;
+	}
+	
+	input[type='submit'] {
+		width: 90%;
+		font-size: 24px;
+		background-color: #00C853;
+		color: #fff;
+		padding: 15px;
+	}

@@ -21,12 +21,8 @@ module.exports = function (app) {
     
     
     app.get('/', function (req, res) {
-        
-        /*con.query("INSERT INTO users (fullName, email) VALUES ('Bharat Kashyap', 'bbw@ghm.com')", function (err,rows) {
-        console.log("Query Executed");
-        });*/
-        
-        res.render('index');
+        console.log("Application home loaded");
+        res.send('sup');
     });
     
     app.post('/addSpot', function (req, res) {
@@ -38,7 +34,7 @@ module.exports = function (app) {
           console.log(err.message);
         else
           console.log("Success!");
-        res.redirect('/');
+        res.redirect('/success.html');
     });
     });
     
@@ -149,6 +145,6 @@ module.exports = function (app) {
           {
             if(err) throw err;
           });
-      res.redirect('/');
+      res.redirect('/../../success.html');
      });   
 };

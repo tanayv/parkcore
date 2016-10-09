@@ -3,22 +3,17 @@
 <head>
 <title></title>
 <style>
-#mapdiv {
-	margin: 0;
-	padding: 0;
-	width: 500px;
-	height: 500px;
-}
 
-#latitude, #longitude
-{
-	
-}
 </style>
 
+<link rel='stylesheet' href='./style.css'>
+<meta name="viewport" content="maximum-scale=1, user-scalable=0"/> <!--320-->
 <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=true"></script>
+
 <script>
 	var getId = null;
+	
+	
 	function revGeoLocate()
 	{
 		if (navigator.geolocation)
@@ -29,7 +24,7 @@
 					timeout : Infinity,
 					maximumAge : 0
 				};
-			getId = navigator.geolocation.getCurrentPosition(showPosition, showError, options); //To do : Stop this from reiterating
+			getId = navigator.geolocation.getCurrentPosition(showPosition, showError, options); 
 		}
 		else
 		{
@@ -48,13 +43,14 @@
 				if(status == 'OK')
 					{
 						if(results[0])
-							elem.innerHTML += "Location : " + results[0].formatted_address;
+							elem.innerHTML = "Location : " + results[0].formatted_address.substring(0, results[0].formatted_address.length-15);
 					}
 				});
 
 			console.log((latlng.lat).toFixed(5) + "," + (latlng.lng).toFixed(5));
 			document.getElementById('latitude').value = latlng.lat;
 			document.getElementById('longitude').value = latlng.lng;
+			document.getElementById('submitLocation').disabled = false;
 	}
 
 	function showError(error)
@@ -79,11 +75,29 @@
 	</script>
 	</head>
 	<body onload = revGeoLocate()>
-		<p id = mapdiv></p>
-		<form action = /addSpot method = POST>
-		<input name = lng type = text id = longitude>
-		<input name = lat type = text id = latitude>
-		<input type = submit value = Submit>
-		</form>
+		<div class='container'>
+			<div class='top'></div>
+			<div class='cardFeed'>
+			<center>
+				<div class='card' style='box-sizing: border-box;'>
+					<p id='mapdiv'>Location: Fetching Address...</p>
+					<form action='/findSpot' method='POST'>
+						<p class='formLatLong'>
+						Longitude: <input name='lng' type='text' id='longitude' > <br>
+						Latitude: <input name='lat' type='text' id='latitude' > <br> <br>
+						</p>
+						<center><input type='submit' value='Find Nearby Spots' disabled id='submitLocation'></center> <br>
+					</form>
+				</div>
+				<div class='card' style='padding: 44px;box-sizing: border-box;'>
+					<form action='/location2.html' method='GET'>
+						<center><input type='submit' value='Add a Spot' style='background-color: #00C853 !important;'></center> <br>
+					</form>
+				</div>
+				
+				<br>
+			</center>
+			</div>
+		</div>
 	</body>
 </html>
