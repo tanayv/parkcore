@@ -1,0 +1,117 @@
+script(src='https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=true')
+script
+	var getId = null;
+	function geoLocate()
+	{
+		if (navigator.geolocation)
+		{
+			var options =
+				{
+					enableHighAccuracy : true,
+					timeout : Infinity,
+					maximumAge : 0
+				};
+			getId = navigator.geolocation.getCurrentPosition(calcTimes, showError, options);
+		}
+		else
+		{
+			alert('Geolocation is not supported in your browser');
+		}
+	}
+
+  function calcTimes(position)
+    {
+      var latlng = {'lat' : position.coords.latitude, 'lng' : position.coords.longitude};
+      document.getElementById('longitude').value = latlng.lng;
+      document.getElementById('latitude').value = latlng.lat;
+      var lat = req.body.lat;
+        var lng = req.body.lng;
+        var origin = new google.maps.LatLng(lat, lng);
+      
+      //var destinations = ['Chicago, United States of America', 'Denver, United States of America', 'Vancouver, Canada', 'Michigan, United States of America'];
+        var seconds = ((new Date).getTime())/1000;
+      //var times = [(seconds-1475936281)/60, (seconds-1475936282)/60, (seconds-1475936281)/60, (seconds-1475936281)/60
+          
+      
+        var longlats =  new Array();
+      
+        for(var i=0; i<rows.length; i++)
+        {
+          var something = new google.maps.LatLng(rows[i].Lat, rows[i].Lng);
+          longlats.push(something);
+        }
+      
+        var times = new Array();
+      
+        for(var i=0; i<rows.length; i++)
+        {
+          var something = (seconds-rows[i].Time)/60;
+          times.push(something);
+        }
+      
+        var distServ = new google.maps.DistanceMatrixService();
+        distServ.getDistanceMatrix
+        ({
+        origins : [origin],
+        destinations : longlats, //To do : Figure out way to insert number of elements equal to number of SQL Table rows
+        travelMode : 'DRIVING',
+
+        }, 
+        function(response, status)
+        {
+          var lambda = 3;
+          var origins = response.originAddresses;
+          var destinations = response.destinationAddresses;
+          if(status == 'OK')
+            {
+              var dataset = new Array();
+              for(var i = 0; i<origins.length; i++)
+                {
+                  var results = response.rows[i].elements;
+                  for(var j=0; j<results.length; j++)
+                    {
+                      var element = results[j];
+                      var duration = (element.duration.value)/60;
+                      var temp = new Array();
+                      temp = [destinations[j], duration, , lambda*times[j] + duration];
+                      dataset.push(temp);
+                    }
+                        
+                  var sorted_dataset = dataset.sort(sortFunction);
+
+                  function sortFunction(a, b) 
+                    {
+                      if (a[3] === b[3]) 
+                        return 0;
+                      else
+                        return (a[3] < b[3]) ? -1 : 1;
+                    }
+                          
+                }
+            }
+        });
+        
+    });
+
+    }  
+      
+
+    function showError(error)
+  	{
+  		var err = document.getElementById('mapdiv');
+  		switch(error.code)
+  		{
+  			case error.PERMISSION_DENIED:
+  			err.innerHTML = "User denied the request for Geolocation."
+  			break;
+  			case error.POSITION_UNAVAILABLE:
+  			err.innerHTML = "Location information is unavailable."
+  			break;
+  			case error.TIMEOUT:
+  			err.innerHTML = "The request to get user location timed out."
+  			break;
+  			case error.UNKNOWN_ERROR:
+  			err.innerHTML = "An unknown error occurred."
+  			break;
+  		}
+  	}
