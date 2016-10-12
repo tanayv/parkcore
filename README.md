@@ -1,7 +1,6 @@
 ##ParkCore
----
 
-Built at MHacks 8 with @bishk, @bharatkashyap, @akshaykg42
+Built at MHacks 8 with [@bishk](github.com/bishk), [@bharatkashyap](github.com/bharatkashyap), [@akshaykg42](github.com/akshaykg42)
 
 To launch application: 
 
